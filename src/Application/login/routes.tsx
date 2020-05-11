@@ -5,19 +5,9 @@ export default [
     name: "登录",
     path: "/login",
     exact: true,
-    component: components.LoginBody,
+    component: components.StyleLogin,
     meta: {
       requiresAuth: false,
     }
   },
-  // {
-  //   path: "/child/:id",
-  //   component: Child,
-  //   routes: [
-  //     {
-  //       path: "/child/:id/grand-child",
-  //       component: GrandChild
-  //     }
-  //   ]
-  // }
 ];

@@ -1,15 +1,15 @@
-import TheHeader from "./the-header";
-import TheHeaderTitle from "./the-header-title";
-import TheSidebar from "./the-sidebar";
+import StyleTheHeader from "./the-header";
+import StyleTheHeaderTitle from "./the-header-title";
+import StyleTheSidebar from "./the-sidebar";
 import StyleTheContent from "./the-content";
-import TheFooter from "./the-footer";
-import TheFooterCopyright from "./the-footer-copyright";
+import StyleTheFooter from "./the-footer";
+import StyleTheFooterCopyright from "./the-footer-copyright";
 
 export default {
-  TheHeader,
-  TheHeaderTitle,
-  TheSidebar,
+  StyleTheHeader,
+  StyleTheHeaderTitle,
+  StyleTheSidebar,
   StyleTheContent,
-  TheFooter,
-  TheFooterCopyright
+  StyleTheFooter,
+  StyleTheFooterCopyright
 };

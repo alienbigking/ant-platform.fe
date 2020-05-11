@@ -5,6 +5,12 @@
       {
         "libraryName": "antd"
       }
+    ],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
     ]
   ]
 }

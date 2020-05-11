@@ -1,39 +1,31 @@
 import React, {Component} from 'react';
-import {Button} from 'antd';
 import styled from "styled-components";
+import classNames from 'classnames';
 
+import StyleTheFooterCopyright from "./the-footer-copyright";
 
-class loginBody extends Component<any, any> {
+class TheFooter extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   componentDidMount() {
-    console.log("渲染完成")
   }
 
   componentWillUnmount() {
-    console.log("将要卸载");
   }
 
   render() {
-    return <div>
-      <Button type="primary">测试按钮</Button>
+    return <div className={classNames(this.props.className, {footer: true})}>
+      <StyleTheFooterCopyright></StyleTheFooterCopyright>
     </div>;
   }
 
 }
 
-// const StyleButton = styled(Button)`
-//   font-size: 16px;
-//   text-align: center;
-//   `;
-//
-// const StyleH1 = styled.h1`
-//   font-size: 60px;
-//   text-align: center;
-//   `;
+const StyleTheFooter = styled(TheFooter)`
 
-export default loginBody
+  `;
+
+
+export default StyleTheFooter
