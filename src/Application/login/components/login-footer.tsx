@@ -1,30 +1,31 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {Button} from 'antd';
+import classNames from "classnames";
 
 
-class loginBody extends Component<any, any> {
+class loginFooter extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    // this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
   componentDidMount() {
-    console.log("渲染完成")
   }
 
   componentWillUnmount() {
-    console.log("将要卸载");
   }
 
   render() {
-    return <div>
-      <Button type="primary">测试按钮</Button>
+    return <div className={classNames(this.props.className, {'login-footer': true})}>
+      <span>备案信息</span>
     </div>;
   }
 
 }
 
+const StyleLoginFooter = styled(loginFooter)`
+ &{
+ }
+  `;
 
-export default loginBody
+export default StyleLoginFooter

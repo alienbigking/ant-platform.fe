@@ -1,20 +1,16 @@
-import {Redirect} from "react-router-dom";
-
 import {routes as login} from "./login";
+import {routes as user} from "./user";
 
-import main from "./main";
+import StyleMain from "./main";
 
 export default [
   {
+    name: "root",
+    component: StyleMain,
     path: "/",
     exact: true,
-    component: main,
     routes: [
-      {
-        path: "/",
-        exact: true,
-        // redirect: '/dashboard'
-      },
+      ...user
     ]
   },
   ...login,

@@ -1,0 +1,5 @@
+@import './variables.module.scss';
+
+@mixin btnCommon($property,$value) {
+  #{$property}: $value;
+}

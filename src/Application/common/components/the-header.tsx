@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import {Button} from 'antd';
 import styled from "styled-components";
+import classNames from 'classnames';
 
+import StyleTheHeaderTitle from "./the-header-title"
 
-class loginBody extends Component<any, any> {
+class TheHeader extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   componentDidMount() {
@@ -19,21 +18,16 @@ class loginBody extends Component<any, any> {
   }
 
   render() {
-    return <div>
-      <Button type="primary">测试按钮</Button>
+    return <div className={classNames(this.props.className, {header: true})}>
+      <StyleTheHeaderTitle></StyleTheHeaderTitle>
     </div>;
   }
 
 }
 
-// const StyleButton = styled(Button)`
-//   font-size: 16px;
-//   text-align: center;
-//   `;
-//
-// const StyleH1 = styled.h1`
-//   font-size: 60px;
-//   text-align: center;
-//   `;
+const StyleTheHeader = styled(TheHeader)`
 
-export default loginBody
+  `;
+
+
+export default StyleTheHeader
