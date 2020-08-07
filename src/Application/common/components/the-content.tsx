@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import styled from "styled-components";
 import classNames from 'classnames';
-import {Route, Switch} from "react-router-dom";
+import {Route, Switch,Link } from "react-router-dom";
 
 import StyleTheContentBreadcrumb from "./the-content-breadcrumb";
 import StyleUserList from "../../user/components/user-list";
-import StyleMain from "../../main";
 
-class theContent extends Component<any, any> {
+class TheContent extends Component<any, any> {
   constructor(props: any) {
     super(props);
   }
@@ -20,12 +19,13 @@ class theContent extends Component<any, any> {
 
   render() {
     const children = this.props.children;
+    console.log("子组件",this.props);
     console.log("the-content", this.props);
 
     return <div className={classNames(this.props.className, {content: true})}>
       <StyleTheContentBreadcrumb></StyleTheContentBreadcrumb>
       <div className={classNames('content__main')}>
-        {children}
+        {this.props.children}
       </div>
     </div>
       ;
@@ -33,7 +33,7 @@ class theContent extends Component<any, any> {
 
 }
 
-const StyleTheContent = styled(theContent)`
+const StyleTheContent = styled(TheContent)`
   &{
     display: flex;
     flex-direction: column;

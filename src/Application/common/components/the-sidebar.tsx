@@ -12,11 +12,9 @@ class TheSidebar extends Component<any, any> {
   }
 
   componentDidMount() {
-    console.log("渲染完成")
   }
 
   componentWillUnmount() {
-    console.log("将要卸载");
   }
 
   render() {

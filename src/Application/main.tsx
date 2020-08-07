@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import {Layout, Menu} from 'antd';
 import styled from "styled-components";
 import classNames from "classnames";
@@ -6,7 +7,8 @@ import {Route, Switch} from "react-router-dom";
 
 import {components as commonComponents} from "./common";
 import StyleUserList from "./user/components/user-list";
-import {routes} from "./index";
+
+import routes from "./routes";
 
 const {Header, Footer, Sider, Content} = Layout;
 
@@ -14,6 +16,7 @@ const {Header, Footer, Sider, Content} = Layout;
 class Main extends Component<any, any> {
   constructor(props: any) {
     super(props);
+    console.log("main组件", this.props);
   }
 
   componentDidMount() {
@@ -23,8 +26,6 @@ class Main extends Component<any, any> {
   }
 
   render() {
-    const children = this.props.children;
-    console.log("布局组件", children);
     return <Layout className={classNames(this.props.className, {main: true})} style={{minHeight: '100vh'}}>
       <Header className={classNames({main__header: true})}>
         <commonComponents.StyleTheHeader></commonComponents.StyleTheHeader>
@@ -35,6 +36,12 @@ class Main extends Component<any, any> {
         </Sider>
         <Content className={classNames({main__content: true})}>
           <commonComponents.StyleTheContent>
+            {
+              routes.map((route)=>{
+                console.log("路由信息",route);
+                return <Route  key={route.path} exact path={route.path} component={route.component}/>
+              })
+            }
           </commonComponents.StyleTheContent>
           <Footer className={classNames({main__footer: true})}>
             <commonComponents.StyleTheFooter></commonComponents.StyleTheFooter>
