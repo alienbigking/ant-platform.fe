@@ -109,9 +109,6 @@ class UserList extends Component<any, any> {
     ];
     return <div className={classNames(this.props.className, {"user-list": true})}>
       <Table columns={columns} dataSource={data}/>
-      <div>
-        用户列表数据
-      </div>
     </div>
       ;
   }
@@ -132,8 +129,7 @@ const mapDispatchToProps = (dispatch: any) => {
 
 const StyleUserList = styled(UserList)`
   &{
-    display: flex;
-    flex-direction: column;
+
   }
   `;
 

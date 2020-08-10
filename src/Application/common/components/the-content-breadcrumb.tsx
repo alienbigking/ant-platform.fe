@@ -18,11 +18,9 @@ class TheContentBreadcrumb extends Component<any, any> {
   }
 
   componentDidMount() {
-    console.log("渲染完成")
     this.setState({
       breadcrumbs: []
     })
-    console.log("state", this.state.breadcrumbs)
   }
 
   componentWillUnmount() {

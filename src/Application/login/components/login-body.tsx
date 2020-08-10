@@ -8,8 +8,10 @@ import {bindActionCreators} from 'redux';
 
 import actions from '../redux/actions';
 
+import ParticlesBg from 'particles-bg'
+
 interface State {
-  user: object
+  user: any
 }
 
 class loginBody extends Component<any, any> {
@@ -26,7 +28,8 @@ class loginBody extends Component<any, any> {
       username: "欧阳伟",
       password: "123456",
       mode: "account_password"
-    }
+    },
+
   }
 
   componentDidMount() {
@@ -46,6 +49,28 @@ class loginBody extends Component<any, any> {
   }
 
   render() {
+    const particlesBgConfig = {
+      num: [4, 7],
+      rps: 0.1,
+      radius: [5, 40],
+      life: [1.5, 3],
+      v: [2, 3],
+      tha: [-40, 40],
+      alpha: [0.6, 0],
+      scale: [1, 0.1],
+      position: "center",
+      color: ["random", "#ff0000"],
+      cross: "dead",
+      random: 15,
+      g: 5,
+      onParticleUpdate: (ctx: any, particle: any) => {
+        ctx.beginPath();
+        ctx.rect(particle.p.x, particle.p.y, particle.radius * 2, particle.radius * 2);
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
     console.log("render渲染", this.props);
     return <div className={classNames(this.props.className, {"login-body": true})}>
       <Form
@@ -57,9 +82,11 @@ class loginBody extends Component<any, any> {
         <Form.Item
           className="login-form-username"
           name="username"
+          initialValue={this.state.user.username}
           rules={[{required: true, message: '请输入用户名!'}]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="Username"/>
+          <Input prefix={<UserOutlined className="site-form-item-icon"/>}
+                 placeholder="请输入用户名!"/>
         </Form.Item>
         <Form.Item
           className="login-form-password"
@@ -68,8 +95,9 @@ class loginBody extends Component<any, any> {
         >
           <Input
             prefix={<LockOutlined className="site-form-item-icon"/>}
+            value={this.state.user.password}
             type="password"
-            placeholder="Password"
+            placeholder="请输入密码 !"
           />
         </Form.Item>
         <Form.Item
@@ -92,6 +120,7 @@ class loginBody extends Component<any, any> {
           <a className="login-form-register" href="">现在注册!</a>
         </Form.Item>
       </Form>
+      <ParticlesBg type="color" config={particlesBgConfig} bg={true}/>
     </div>;
   }
 
@@ -118,7 +147,6 @@ const StyleLoginBody = styled(loginBody)`
   padding: 40px 20px;
   border: 1px solid #dddddd;
   border-radius: 8px;
-
  }
 
  .login-form{

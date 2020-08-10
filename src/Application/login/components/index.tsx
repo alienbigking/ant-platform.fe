@@ -1,1 +1,1 @@
-export {default as StyleLogin} from "./login";
+export {default as Login} from "./login";

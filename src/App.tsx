@@ -9,7 +9,7 @@ import {reduxs} from "./Application";
 import GlobalStyle from "./GlobalStyle";
 import stylesVariables from './styles-variables';
 
-import StyleMain from "./Application/main";
+import Main from "./Application/main";
 
 import {routes as login} from "./Application/login";
 
@@ -23,18 +23,14 @@ class App extends Component<any, any> {
     return <ThemeProvider theme={{Variables: stylesVariables}}>
       <React.Fragment>
         <Provider store={store}>
-          <HashRouter>
+          <BrowserRouter>
             <Switch>
-              <Route path="/" component={StyleMain}></Route>
-
-              <Route exact path={login.path} component={login.component}></Route>
-
-              <Route path='/404'/>
-              <Redirect  to='/login' from='/'/>
-              <Redirect to='/404'/>
+              <Route  strict exact path={login.path} component={login.component}/>
+              <Route exact path='/404'/>
+              <Route strict path="/" component={Main}/>
+              <Redirect to="/" from="/*"/>
             </Switch>
-          </HashRouter>
-
+          </BrowserRouter>
         </Provider>
         <GlobalStyle></GlobalStyle>
       </React.Fragment>

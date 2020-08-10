@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {Layout, Menu} from 'antd';
 import styled from "styled-components";
 import classNames from "classnames";
 import {Route, Switch} from "react-router-dom";
 
 import {components as commonComponents} from "./common";
-import StyleUserList from "./user/components/user-list";
 
 import routes from "./routes";
 
@@ -16,7 +14,6 @@ const {Header, Footer, Sider, Content} = Layout;
 class Main extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    console.log("main组件", this.props);
   }
 
   componentDidMount() {
@@ -36,12 +33,13 @@ class Main extends Component<any, any> {
         </Sider>
         <Content className={classNames({main__content: true})}>
           <commonComponents.StyleTheContent>
-            {
-              routes.map((route)=>{
-                console.log("路由信息",route);
-                return <Route  key={route.path} exact path={route.path} component={route.component}/>
-              })
-            }
+            <Switch>
+              {
+                routes.map((route,index) => {
+                  return <Route  exact key={index} path={route.path} component={route.component}/>
+                })
+              }
+            </Switch>
           </commonComponents.StyleTheContent>
           <Footer className={classNames({main__footer: true})}>
             <commonComponents.StyleTheFooter></commonComponents.StyleTheFooter>
@@ -68,6 +66,7 @@ background-color: #edeef2 !important;
     }
     &__content{
     position: relative;
+    padding: 20px 0px;
     }
     &__footer{
       position: absolute;

@@ -18,10 +18,6 @@ class TheContent extends Component<any, any> {
   }
 
   render() {
-    const children = this.props.children;
-    console.log("子组件",this.props);
-    console.log("the-content", this.props);
-
     return <div className={classNames(this.props.className, {content: true})}>
       <StyleTheContentBreadcrumb></StyleTheContentBreadcrumb>
       <div className={classNames('content__main')}>
