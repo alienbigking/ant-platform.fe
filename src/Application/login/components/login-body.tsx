@@ -19,7 +19,7 @@ class loginBody extends Component<any, any> {
     super(props);
     this.onFinish = this.onFinish.bind(this);
     this.onLogin = this.onLogin.bind(this);
-    // console.log("属性props", this.props);
+    console.log("属性props", this.props);
 
   }
 
