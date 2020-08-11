@@ -91,11 +91,11 @@ class loginBody extends Component<any, any> {
         <Form.Item
           className="login-form-password"
           name="password"
+          initialValue={this.state.user.password}
           rules={[{required: true, message: '请输入密码 !'}]}
         >
           <Input
             prefix={<LockOutlined className="site-form-item-icon"/>}
-            value={this.state.user.password}
             type="password"
             placeholder="请输入密码 !"
           />
