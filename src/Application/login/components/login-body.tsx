@@ -17,6 +17,9 @@ interface State {
 class loginBody extends Component<any, any> {
   constructor(props: any) {
     super(props);
+
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
     this.onFinish = this.onFinish.bind(this);
     this.onLogin = this.onLogin.bind(this);
     console.log("属性props", this.props);
@@ -37,6 +40,27 @@ class loginBody extends Component<any, any> {
   }
 
   componentWillUnmount() {
+
+  }
+
+  onChangeUsername(event: any) {
+    console.log("当前内容",event.target.value);
+    this.setState({
+      user: {
+        username: event.target.value,
+      }
+    },()=>{
+      console.log("用户名",this.state);
+    })
+
+  }
+
+  onChangePassword(event: any) {
+    this.setState({
+      user: {
+        password: event.target.value
+      }
+    })
   }
 
   onFinish() {
@@ -86,7 +110,9 @@ class loginBody extends Component<any, any> {
           rules={[{required: true, message: '请输入用户名!'}]}
         >
           <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                 placeholder="请输入用户名!"/>
+                 placeholder="请输入用户名!"
+                 onChange={this.onChangeUsername}
+          />
         </Form.Item>
         <Form.Item
           className="login-form-password"
@@ -98,6 +124,7 @@ class loginBody extends Component<any, any> {
             prefix={<LockOutlined className="site-form-item-icon"/>}
             type="password"
             placeholder="请输入密码 !"
+            onChange={this.onChangePassword}
           />
         </Form.Item>
         <Form.Item
