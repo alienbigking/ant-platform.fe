@@ -1,5 +1,7 @@
-let state = {
-  user: {}
+const state = {
+  user: {
+
+  }
 }
 
 export default state;

@@ -4,13 +4,15 @@ import {loginService} from '../services';
 export default {
   login(params: any) {
     return (dispatch: any) => {
-      loginService.login(params).then((data) => {
-        console.log("action里的参数", params);
-        dispatch({
-          type: types.LOGIN,
-          params: data
-        });
-      });
+      console.log("action里的参数", params);
+
+      return loginService.login(params)
+      //   .then((data) => {
+      //   dispatch({
+      //     type: types.LOGIN,
+      //     params: data
+      //   });
+      // });
     }
   },
   register(params: any) {

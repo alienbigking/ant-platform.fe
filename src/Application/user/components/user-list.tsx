@@ -7,8 +7,6 @@ import {bindActionCreators} from 'redux';
 
 import actions from '../redux/actions';
 
-import StyleTheContent from "../../common/components/the-content";
-import StyleMain from "../../main";
 
 interface State {
   pagination: object;

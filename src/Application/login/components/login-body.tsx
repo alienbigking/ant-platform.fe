@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
-import {Form, Input, Button, Checkbox} from 'antd';
-import {UserOutlined, LockOutlined} from '@ant-design/icons';
-import styled from "styled-components";
-import classNames from 'classnames';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {Form, Input, Button, Checkbox, message} from 'antd';
+import {UserOutlined, LockOutlined} from '@ant-design/icons';
+
+import styled from "styled-components";
+import classNames from 'classnames';
 
 import actions from '../redux/actions';
-
 import ParticlesBg from 'particles-bg'
+import {default as $route} from '../../utils/route/route';
+
 
 interface State {
   user: any
@@ -17,35 +19,63 @@ interface State {
 class loginBody extends Component<any, any> {
   constructor(props: any) {
     super(props);
+
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
     this.onFinish = this.onFinish.bind(this);
     this.onLogin = this.onLogin.bind(this);
-    // console.log("属性props", this.props);
+    console.log("props", this.props);
 
   }
 
   state: State = {
     user: {
-      username: "欧阳伟",
-      password: "123456",
-      mode: "account_password"
+      userIdentifier: null,
+      credential: null,
+      identityType: "password"
     },
 
   }
 
   componentDidMount() {
-    console.log("组件渲染完成", this.props);
+    // console.log("组件渲染完成", this.props);
   }
 
   componentWillUnmount() {
+
+  }
+
+  onChangeUsername(event: any) {
+    const value = event.target.value;
+
+    this.setState((preState: State) => ({
+        user: {...preState.user, userIdentifier: value}
+      })
+    )
+
+  }
+
+  onChangePassword(event: any) {
+    const value = event.target.value;
+
+    this.setState((preState: State) => ({
+        user: {...preState.user, credential: value}
+      })
+    )
+
+
   }
 
   onFinish() {
-    console.log("表单加载完成");
   }
 
   onLogin() {
-    console.log("点击登录", this.state)
-    this.props.actions.login(this.state.user)
+    console.log("点击登录", $route);
+
+    this.props.actions.login(this.state.user).then(() => {
+      message.success("登录成功")
+      $route.push('/');
+    })
   }
 
   render() {
@@ -71,7 +101,7 @@ class loginBody extends Component<any, any> {
         ctx.closePath();
       }
     }
-    console.log("render渲染", this.props);
+
     return <div className={classNames(this.props.className, {"login-body": true})}>
       <Form
         name="normal_login"
@@ -82,22 +112,25 @@ class loginBody extends Component<any, any> {
         <Form.Item
           className="login-form-username"
           name="username"
-          initialValue={this.state.user.username}
+          initialValue={this.state.user.userIdentifier}
           rules={[{required: true, message: '请输入用户名!'}]}
         >
           <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                 placeholder="请输入用户名!"/>
+                 placeholder="请输入用户名!"
+                 onChange={this.onChangeUsername}
+          />
         </Form.Item>
         <Form.Item
           className="login-form-password"
           name="password"
+          initialValue={this.state.user.credential}
           rules={[{required: true, message: '请输入密码 !'}]}
         >
           <Input
             prefix={<LockOutlined className="site-form-item-icon"/>}
-            value={this.state.user.password}
             type="password"
             placeholder="请输入密码 !"
+            onChange={this.onChangePassword}
           />
         </Form.Item>
         <Form.Item
@@ -127,9 +160,9 @@ class loginBody extends Component<any, any> {
 }
 
 function mapStateToProps(state: any) {
-  console.log("作为组件props", state);
+  console.log("作为组件mapStateToProps", state);
   return {
-    user: state.login.user
+    mylogin: state.login.user
   }
 }
 
