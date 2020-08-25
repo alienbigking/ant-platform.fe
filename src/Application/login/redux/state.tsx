@@ -1,5 +1,7 @@
 const state = {
-  user: {}
+  user: {
+
+  }
 }
 
 export default state;

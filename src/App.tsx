@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled, {ThemeProvider} from "styled-components";
-import {BrowserRouter, HashRouter, Route, Redirect, Switch} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, Router, Redirect, Switch} from "react-router-dom";
+import {createHashHistory, createBrowserHistory} from 'history';
 import thunk from 'redux-thunk';
 import {combineReducers, createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
@@ -9,9 +10,12 @@ import {reduxs} from "./Application";
 import GlobalStyle from "./GlobalStyle";
 import stylesVariables from './styles-variables';
 
+
 import Main from "./Application/main";
 
 import {routes as login} from "./Application/login";
+
+const myhistory = createHashHistory();
 
 const AppRedux = combineReducers(reduxs);
 const store = createStore(
@@ -23,14 +27,14 @@ class App extends Component<any, any> {
     return <ThemeProvider theme={{Variables: stylesVariables}}>
       <React.Fragment>
         <Provider store={store}>
-          <BrowserRouter>
+          <Router history={myhistory}>
             <Switch>
-              <Route  strict exact path={login.path} component={login.component}/>
+              <Route strict exact path={login.path} component={login.component}/>
               <Route exact path='/404'/>
               <Route strict path="/" component={Main}/>
               <Redirect to="/" from="/*"/>
             </Switch>
-          </BrowserRouter>
+          </Router>
         </Provider>
         <GlobalStyle></GlobalStyle>
       </React.Fragment>
