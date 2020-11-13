@@ -20,7 +20,7 @@ interface State {
 interface ErrorMessage {
   response:{
     data: {
-      message: string;
+      message?: string;
     }
   }
 }
