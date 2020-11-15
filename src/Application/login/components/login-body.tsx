@@ -13,10 +13,29 @@ import {default as $route} from '../../utils/route/route';
 
 
 interface State {
-  user: any
+  user: any,
+  loading: boolean
+}
+
+interface ErrorMessage {
+  response:{
+    data: {
+      message?: string;
+    }
+  }
 }
 
 class loginBody extends Component<any, any> {
+
+  state: State = {
+    user: {
+      userIdentifier: null,
+      credential: null,
+      identityType: "password"
+    },
+    loading: false
+  }
+
   constructor(props: any) {
     super(props);
 
@@ -25,16 +44,6 @@ class loginBody extends Component<any, any> {
     this.onFinish = this.onFinish.bind(this);
     this.onLogin = this.onLogin.bind(this);
     console.log("props", this.props);
-
-  }
-
-  state: State = {
-    user: {
-      userIdentifier: null,
-      credential: null,
-      identityType: "password"
-    },
-
   }
 
   componentDidMount() {
@@ -70,12 +79,18 @@ class loginBody extends Component<any, any> {
   }
 
   onLogin() {
-    console.log("点击登录", $route);
-
+    this.setState({loading: true})
     this.props.actions.login(this.state.user).then(() => {
       message.success("登录成功")
+      this.setState({loading: false})
       $route.push('/');
-    })
+
+    }).catch(<T extends ErrorMessage>(error: T) => {
+        console.log("错误消息", error.response);
+        message.error(error.response.data.message)
+        this.setState({loading: false})
+      }
+    )
   }
 
   render() {
@@ -147,7 +162,8 @@ class loginBody extends Component<any, any> {
         <Form.Item
           className="login-form-submit"
         >
-          <Button type="primary" htmlType="submit" onClick={this.onLogin} className="login-form-button">
+          <Button type="primary" htmlType="submit" onClick={this.onLogin} className="login-form-button"
+                  loading={this.state.loading}>
             登录
           </Button>
           <a className="login-form-register" href="">现在注册!</a>
